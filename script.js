@@ -1,25 +1,29 @@
-// Select the form
 const form = document.querySelector('.contact-form');
 
-// When the form is submitted
 form.addEventListener('submit', function(event) {
-    // Prevent the page from refreshing
     event.preventDefault();
 
-    // Get the values from the inputs
-    const name = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const message = form.querySelector('textarea').value;
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const message = form.querySelector('textarea').value.trim();
 
-    // Simple validation
+    // Remove old message if exists
+    const oldMsg = document.querySelector('.form-message');
+    if (oldMsg) oldMsg.remove();
+
+    // Create message element
+    const msg = document.createElement('p');
+    msg.classList.add('form-message');
+
     if (name === '' || email === '' || message === '') {
-        alert('Please fill in all fields.');
-        return;
+        msg.textContent = 'Please fill in all fields.';
+        msg.style.color = '#e74c3c';
+    } else {
+        msg.textContent = `Thank you, ${name}! Your message has been sent.`;
+        msg.style.color = '#27ae60';
+        form.reset();
     }
 
-    // Success message
-    alert('Thank you, ' + name + '! Your message has been sent.');
-
-    // Clear the form
-    form.reset();
+    // Show the message below the form
+    form.appendChild(msg);
 });

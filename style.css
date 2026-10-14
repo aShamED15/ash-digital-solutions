@@ -221,4 +221,10 @@ footer {
     .services-grid {
         flex-direction: column;
     }
+
+    .form-message {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    }
 }
